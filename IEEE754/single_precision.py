@@ -1,20 +1,27 @@
 file = open("bits.txt", "r")
 
+lines = file.readlines()
+
+count = 0
+
 bits = []
 
-for line in file:
-    for num in line.split(','):
+for line in lines:
+    count = count + 1
+    if (count == 1): 
+        signal = int(line)
+    elif (count == 2):
+        expoente = line
+    elif (count == 3):
+        for num in line.split(' '):
             bits.append(int(num))
-        
-expo = [] 
 
-print(bits)
+expo = []
 
 #setup exponent
 for i in range (24):
     if (i != 0):
         expo.append((i*-1))
-
 
 mantissa = 0
 aux = 0
@@ -24,13 +31,8 @@ for bit in bits:
         aux = bit * (2**ex)
         mantissa += aux 
     
-print (mantissa)
-
-#formula geral 
-
-
-expoente = int('10000101',2)
-signal = 1
+#cast to dec
+expoente = int(expoente,2)
 
 def toDec(mantissa, expoente, signal):
     expoente = expoente - 127
